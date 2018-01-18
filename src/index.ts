@@ -3,7 +3,7 @@ import { getClientIp, Request as RequestInterface } from 'request-ip';
 import { unauthorized } from 'boom';
 const pkg = require('../package.json');
 
-export default {
+exports.plugin = {
 	name: pkg.name,
 	version: pkg.version,
 	pkg,

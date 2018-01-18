@@ -244,7 +244,7 @@ topo@3.x.x:
   dependencies:
     hoek "5.x.x"
 
-typescript@^2.3.4:
+typescript@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 
