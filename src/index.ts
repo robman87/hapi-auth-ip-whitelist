@@ -1,3 +1,4 @@
+import { Request, Server, ServerOptions } from 'hapi';
 import { isEqual as ipIsEqual } from 'ip';
 import { unauthorized } from 'boom';
 import pkg from '../package.json';
@@ -6,14 +7,14 @@ export const plugin = {
 	name: pkg.name,
 	version: pkg.version,
 	pkg,
-	register(server:any, options:object) {
+	register(server:Server, options:ServerOptions) {
 		server.auth.scheme('ip-whitelist', ipWhitelistScheme)
 	}
 };
 
-function ipWhitelistScheme(server:any, whitelisted: string[]) {
+function ipWhitelistScheme(server:Server, whitelisted:string[]) {
 	return {
-		authenticate(request:any, h:any) {
+		authenticate(request:Request, h:any) {
 			const { remoteAddress } = request.info;
 
 			const list = whitelisted instanceof Array ? whitelisted : [whitelisted];
