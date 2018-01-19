@@ -1,7 +1,7 @@
 import { Request, Server, ServerOptions } from 'hapi';
 import { isEqual as ipIsEqual } from 'ip';
 import { unauthorized } from 'boom';
-import pkg from '../package.json';
+const pkg = require('../package.json');
 
 export const plugin = {
 	name: pkg.name,
