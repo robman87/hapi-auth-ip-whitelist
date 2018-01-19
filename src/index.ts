@@ -1,9 +1,8 @@
 import { isEqual as ipIsEqual } from 'ip';
-import { getClientIp, Request as RequestInterface } from 'request-ip';
 import { unauthorized } from 'boom';
-const pkg = require('../package.json');
+import pkg from '../package.json';
 
-exports.plugin = {
+export const plugin = {
 	name: pkg.name,
 	version: pkg.version,
 	pkg,
@@ -12,13 +11,13 @@ exports.plugin = {
 	}
 };
 
-function ipWhitelistScheme(server:any, whitelisted: string | string[]) {
+function ipWhitelistScheme(server:any, whitelisted: string[]) {
 	return {
-		authenticate(request:RequestInterface, h:any) {
-			const remoteAddress:string = getClientIp(request)
+		authenticate(request:any, h:any) {
+			const { remoteAddress } = request.info;
 
 			const list = whitelisted instanceof Array ? whitelisted : [whitelisted];
-			if (list.some((ip:string) => ipIsEqual(ip, remoteAddress))) {
+			if (list.some(ip => ipIsEqual(ip, remoteAddress))) {
 				return h.authenticated({ credentials: remoteAddress })
 			}
 
